@@ -108,7 +108,13 @@
     items.appendChild(listItem);
 
     }
-    
+    var deleteItem=function(evt){
+    var parent=this.parentNode.parentNode;
+    parent.removeChild(this.parentNode);
+
+    }
+   
+   
 
     var gettodoPosition = function () {
     var todoSize = 250, //Width & Height of the todo
