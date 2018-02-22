@@ -114,7 +114,18 @@
 
     }
    
-   
+    var z=0;
+    var change_focus=function(evt){
+
+    this.style.zIndex=z++;
+    }
+    function random_bg_color() {
+    var x = Math.floor(Math.random() * 256);
+    var y = Math.floor(Math.random() * 256);
+    var z = Math.floor(Math.random() * 256);
+    var bgColor = "rgba(" + x + "," + y + "," + z + ",0.75)";
+    return bgColor;
+    }
 
     var gettodoPosition = function () {
     var todoSize = 250, //Width & Height of the todo
