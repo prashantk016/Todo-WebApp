@@ -1,0 +1,212 @@
+    @import url(https://fonts.googleapis.com/css?family=Lato|Roboto);
+    /*Font size*/
+    /*Font Weight*/
+    /*Font Color*/
+    /*Sizes*/
+    /*Font family*/
+    /*Mixins*/
+    /*Class Selectors*/
+    .pull-right {
+      float: right; }
+
+    .padding-7, .todo-area .todo_main .title, .todo-area .todo_main .content {
+      padding: 7px; }
+.username{
+    color: white;
+    font-size: 20px;
+    margin: 10px 10px 0 0;
+    text-decoration: underline;
+}
+.content{
+    padding-bottom: 0;
+}
+.app_name{
+    padding: 20px;
+   
+    font-size: 20px;
+    color: white;
+}
+
+    /*Tag Selectors*/
+    nav { 
+         border-bottom: 3px solid grey;
+      background-color:cornflowerblue;
+      height: 50px;
+      width: 100%;
+      margin: 0px 0px 10px 0px; }
+      nav a {
+        margin-right: 10px; }
+      nav .add-icon{
+          
+        display: block;
+        width: 50px;
+        height: 50px;
+        -webkit-filter: brightness(0) invert(1);
+        filter: brightness(0) invert(1);
+        transition: 0.3s ease-in-out;
+        -webkit-transition: 0.3s ease-in-out; }
+        nav .add-icon:hover {
+          transform: rotate(90deg);
+          -moz-transform: rotate(90deg);
+          -webkit-transform: rotate(90deg); }
+
+    body {
+        margin: auto;
+      background-color: rgba(0, 0,0, 0.1); }
+
+    .todo-area {
+      width: 100%;
+      height: 90%; }
+      .todo-area .todo_main {
+        display: block;
+        position: absolute;
+        -webkit-box-shadow: 1px 1px 2px 2px #C6D0D3;
+        /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+        -moz-box-shadow: 1px 1px 2px 2px #C6D0D3;
+        /* Firefox 3.5 - 3.6 */
+        box-shadow: 1px 1px 2px 2px #C6D0D3;
+        /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+        /* Safari 3-4, iOS 1-3.2, Android 1.6- */
+        -webkit-border-radius: 5px;
+        /* Firefox 1-3.6 */
+        -moz-border-radius: 5px;
+        /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
+        border-radius: 5px; }
+        .todo-area .todo_main .title {
+          /* Safari 3-4, iOS 1-3.2, Android 1.6- */
+          -webkit-border-radius: 5px 5px 0px 0px;
+          /* Firefox 1-3.6 */
+          -moz-border-radius: 5px 5px 0px 0px;
+          /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
+          border-radius: 5px 5px 0px 0px;
+          font-family: "Roboto", sans-serif;
+          font-size: 20px;
+          font-weight: 600;
+          text-align: center;
+          color: #ffffff;
+/*          background-color: rgba(229, 154, 13, 0.74);*/
+          height: 25px;
+          width: 250px; }
+        .todo-area .todo_main .content {
+          /* Safari 3-4, iOS 1-3.2, Android 1.6- */
+          -webkit-border-radius: 0px 0px 5px 5px;
+          /* Firefox 1-3.6 */
+          -moz-border-radius: 0px 0px 5px 5px;
+          /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
+          border-radius: 0px 0px 5px 5px;
+          font-family: "Lato", sans-serif;
+          font-size: 16px;
+          font-weight: 400;
+          text-align: left;
+          background-color: #ffffff;
+          height: 250px;
+          width: 250px; }
+
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+    li * not(a){
+      float: left;
+    }
+    li, h3 {
+      clear:both;
+      list-style:none;
+    }
+    input, a {
+      outline: none;
+    }
+    .newItem{
+          float: left;
+        display: table-cell;
+        height: auto;
+         border-top: 1px solid #eee;
+        background-color: rgb(180, 180, 180);
+    }
+    .edit,.delete {
+
+      cursor: pointer;
+        transition: 0.3s ease-in-out;
+        -webkit-transition: 0.3s ease-in-out; }
+        nav .add-icon:hover {
+          transform: rotate(90deg);
+          -moz-transform: rotate(90deg);
+          -webkit-transform: rotate(90deg);
+    }
+    .edit img,.delete img{
+     float: right;
+        margin: 8px 4px;
+     width: 20px;
+        height: 20px;
+    }
+    a:hover {
+      color: #333;
+    }
+    /* Heading */
+    h3,
+
+    input[type="text"] {
+      margin-top: 5px;
+      font-size: 18px;
+      line-height: 18px;
+      height: 18px;
+      padding: 10px 10px 0px 10px;
+        
+      border: 1px solid #ddd;
+      background: #fff;
+      border-radius: 6px;
+      font-family: Lato, sans-serif;
+      color: #888;
+    }
+    input[type="text"]:focus {
+      color: #333;
+    }
+
+    /* New Task */
+    label[for='newItem'] {
+      display: block;
+      margin: 0 0 20px;
+    }
+    input .newItem {
+
+    }
+    p > a:hover {
+      color: #0FC57C;
+    }
+
+    /* Task list */
+    li {
+      overflow: hidden;
+    /*  padding: 20px 0;*/
+      border-bottom: 1px solid #eee;
+    }
+    li > input[type="checkbox"] {
+      margin: 0 2px;
+      position: relative;
+    /*  top: 15px;*/
+    }
+    li > label {
+      font-size: 18px;
+      line-height: 40px;
+    /*  width: 237px;*/
+      padding: 0 0 0 6px;
+    }
+    li >  input[type="text"] {
+      width: 226px;
+    }
+    li > .delete:hover {
+      color: #CF2323;
+    }
+
+    /* Edit Task */
+    ul li input[type=text] {
+      display:none;
+    }
+
+    ul li.editMode input[type=text] {
+      display:block;
+    }
+
+    ul li.editMode label {
+      display:none;
+    }
