@@ -1,50 +1,94 @@
-
+var json = false;
+var mydata;
     var addButton = document.getElementById('add-anchor'),
     addtodoListener = function (evt) {
-    var todoArea = document.querySelector('.todo-area'),
-    todo_main=document.createElement('div'),
-    title_div=document.createElement('div'),
-    content_div=document.createElement('div'),
-    items_list=document.createElement('ul'),
-    newItem_div=document.createElement('div'),
-    input_txt=document.createElement('input'),
-    itemButton=document.createElement('a'),
-    plusImg=document.createElement('img');
-
-    todo_main.classList.add("todo_main");
-    title_div.classList.add("title");
-    content_div.classList.add("content");
-    items_list.classList.add("items");
-    newItem_div.classList.add("newItem");
-    input_txt.classList.add("text");
-    itemButton.classList.add("addItem");
-    plusImg.classList.add("addItemImg");
-
-    todo_main.appendChild(title_div);
-    todo_main.appendChild(content_div);
-    content_div.appendChild(items_list);
-    content_div.appendChild(newItem_div);
-    newItem_div.appendChild(input_txt);
-    newItem_div.appendChild(itemButton);
-    itemButton.appendChild(plusImg);
-    plusImg.src="./images/ic_add_black_24px.svg";
-    title_div.innerHTML="Untitled";
-    input_txt.type="text";
-    itemButton.href="#";
-    itemButton.addEventListener('click',addItem);
-
-    title_div.style.background=random_bg_color();
-    position = gettodoPosition();
-    todo_main.style.top = position.top;
-    todo_main.style.left = position.left;
-    items_list.style.height="85%";
-    items_list.style.overflow="auto";
-
-    title_div.contentEditable="true";
-    todoArea.appendChild(todo_main);
-
-    todo_main.addEventListener('click',change_focus);
-    };
+        var todoArea = document.querySelector('.todo-area'),
+        todo_main=document.createElement('div'),
+        title_div=document.createElement('div'),
+        content_div=document.createElement('div'),
+        items_list=document.createElement('ul'),
+        newItem_div=document.createElement('div'),
+        input_txt=document.createElement('input'),
+        itemButton=document.createElement('a'),
+        plusImg=document.createElement('img');
+        author = document.createElement('span');
+         space = document.createTextNode(" ");
+        date = document.createElement('span');
+        author.innerHTML=document.getElementsByClassName("username")[0].innerHTML;
+        date.innerHTML=new Date().toLocaleDateString();
+    
+        todo_main.classList.add("todo_main");
+        title_div.classList.add("title");
+        content_div.classList.add("content");
+        items_list.classList.add("items");
+        newItem_div.classList.add("newItem");
+        input_txt.classList.add("text");
+        itemButton.classList.add("addItem");
+        plusImg.classList.add("addItemImg");
+        author.classList.add("author");
+        date.classList.add("date");
+    
+        todo_main.appendChild(title_div);
+        todo_main.appendChild(content_div);
+        content_div.appendChild(items_list);
+        content_div.appendChild(newItem_div);
+        newItem_div.appendChild(input_txt);
+        newItem_div.appendChild(itemButton);
+        itemButton.appendChild(plusImg);
+        todo_main.appendChild(author);
+        todo_main.appendChild(space);
+        todo_main.appendChild(date);
+        plusImg.src="./images/ic_add_black_24px.svg";
+      
+        title_div.innerHTML="Untitled";
+      
+        input_txt.type="text";
+        itemButton.href="#";
+        itemButton.addEventListener('click',addItem);
+    
+        title_div.style.background=random_bg_color();
+        position = gettodoPosition();
+        todo_main.style.top = position.top;
+        todo_main.style.left = position.left;
+        items_list.style.height="85%";
+        items_list.style.overflow="auto";
+    
+        title_div.contentEditable="true";
+        todoArea.appendChild(todo_main);
+    
+        todo_main.addEventListener('click',change_focus);
+    
+        /* drag and drop note functionality*/
+       var mousePosition;
+       var offset = [0,0];
+       var isDown = false;
+       todo_main.addEventListener('mousedown', function(e) {
+        isDown = true;
+        offset = [
+            todo_main.offsetLeft - e.clientX,
+            todo_main.offsetTop - e.clientY
+        ];
+    }, true);
+        
+        todoArea.addEventListener('mouseup',  function() {
+            isDown = false;
+        }, true);
+        
+        todoArea.addEventListener('mousemove', function(event) {
+            event.preventDefault();
+            if (isDown) {
+                mousePosition = {
+            
+                    x : event.clientX,
+                    y : event.clientY
+            
+                };
+                todo_main.style.left = (mousePosition.x + offset[0]) + 'px';
+                todo_main.style.top  = (mousePosition.y + offset[1]) + 'px';
+            }
+        }, true);
+    
+        };
 
     addButton.addEventListener('click', addtodoListener);
 
