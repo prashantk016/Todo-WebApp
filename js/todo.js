@@ -144,3 +144,33 @@
     left: randomLeft
     };
     }
+    function load() {
+
+        mydata = JSON.parse(data);
+
+        for(var i=0; i<mydata.length;i++){
+            addtodoListener();
+            var todoMain= document.querySelector(".todo_main");
+            var todoItem = document.querySelectorAll(".title");
+            
+           
+            todoItem[i].innerHTML=mydata[i].title;
+            var items= mydata[i].items;
+            if(items != null){
+           
+            for(var j=0;j<items.length;j++){
+
+                    var itemInput = document.querySelectorAll(".text");
+                    var addItemlist = document.querySelectorAll(".addItem");
+                    itemInput[i].value=items[j];
+                    addItemlist[i].click();
+               
+                }
+
+            }
+       
+
+        }
+       
+        
+    }
