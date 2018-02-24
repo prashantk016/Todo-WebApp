@@ -1,1 +1,6 @@
-[{"title" : "shop","items":[ "fruits", "veggies", "chocolates" ]},{"title" : "shop2"}]
+[{"title" : "groceries",
+"items":[ "apple", "eggs", "chocolates", "cheese", "watermelon", "vegetable" ],
+"date":"02/12/2017"}
+,{"title" : "to buy",
+"items":[ "shirts","socks", "jeans", "shoes"],
+"date":"01/31/2017"}]

@@ -1,7 +1,9 @@
-var json = false;
 var mydata;
 
 var addButton = document.getElementById('add-anchor'),
+/*
+Creates a new todo list object
+*/
 addtodoListener = function (evt) {
   
 var todoArea = document.querySelector('.todo-area'),
@@ -120,17 +122,21 @@ todoArea.addEventListener('mousemove', function(event) {
 };
 
 addButton.addEventListener('click', addtodoListener);
-
+/*
+updates the date of the on any change on todo list
+*/
 var update_date=function(evt,addButton){
-    if(evt==null)
-            var todo_main=addButton.parentNode.parentNode;
+    if(evt===null)
+            var todo_main=addButton.parentNode.parentNode
     else
          var todo_main=this.parentNode.parentNode.parentNode;
     var author_date=todo_main.querySelector(".author_date_div");
     var date=author_date.querySelector(".date");
     date.innerHTML=new Date().toLocaleDateString();
 }
-
+/*
+adds a new item to the todo list
+*/
 var addItem=function(evt){
 
 var newItem=this.parentNode;
@@ -151,7 +157,17 @@ var checkBox = document.createElement("input");
 var label = document.createElement("label");
 
 label.contentEditable="true";
-  
+checkBox.addEventListener('click',function(e){
+     var l=this.parentNode;
+        l.style.textDecoration="line-through";
+    
+    if(this.checked){
+        this.nextSibling.contentEditable="false";
+        l.style.textDecoration="line-through";
+    }else{
+        this.nextSibling.contentEditable="true";
+     l.style.textDecoration="";}
+})
 label.addEventListener('keypress',function(evt){
 if (evt.which === 13) {
 evt.preventDefault();
@@ -165,7 +181,6 @@ var deleteButton = document.createElement("a");
 var deleteImage=document.createElement("img");
 deleteImage.src="./images/delete_icon.svg";
 deleteButton.appendChild(deleteImage);
-
 checkBox.type = "checkbox";
 
 deleteButton.className = "delete";
@@ -182,10 +197,12 @@ listItem.appendChild(deleteButton);
 items.appendChild(listItem);
    update_date(null,items);
 }
+/*
+removes the item from the list
+*/
 var deleteItem=function(evt){
 var parent=this.parentNode.parentNode;
 parent.removeChild(this.parentNode);
-
 }
 
 var z=0;
@@ -193,6 +210,9 @@ var change_focus=function(evt){
 
 this.style.zIndex=z++;
 }
+/*
+randomly selects a color a returns the same
+*/
 function random_bg_color() {
 var x = Math.floor(Math.random() * 256);
 var y = Math.floor(Math.random() * 256);
@@ -201,6 +221,9 @@ var bgColor = "rgba(" + x + "," + y + "," + z + ",0.75)";
 return bgColor;
 }
 
+/*
+Returns a random position inside the todo_area
+*/
 var gettodoPosition = function () {
 var todoSize = 250, //Width & Height of the todo
 topPadding = 20, //Padding around nav bar
@@ -223,7 +246,9 @@ var mousePosition;
 var offset = [0,0];
 
 var isDown = false;
-
+/*
+called on body onload to fetch data from json file
+*/
 function load() {
         //Send AJAX call to get the stciky dom.
         var newStickyRequest = new XMLHttpRequest();
@@ -234,16 +259,22 @@ function load() {
         };
         newStickyRequest.send();
 }
-
+/*
+parses the json data and adds creats a new todo object with items
+*/
 function LoadFromJSON(data) {
     mydata = JSON.parse(data);
+     var todoMain= document.querySelector(".todo_main");
+        var todoItem = document.getElementsByClassName("title");
+        var dates = document.getElementsByClassName("date");
+        
     for(var i=0; i<mydata.length;i++){
         addtodoListener();
-        var todoMain= document.querySelector(".todo_main");
-        var todoItem = document.querySelectorAll(".title");
-        
+       
        
         todoItem[i].innerHTML=mydata[i].title;
+     
+        
         var items= mydata[i].items;
         if(items != null){
        
@@ -254,6 +285,7 @@ function LoadFromJSON(data) {
                 itemInput[i].value=items[j];
                 addItemlist[i].click();  
             }
+               dates[i].innerHTML=mydata[i].date;
         }
     }
 }
