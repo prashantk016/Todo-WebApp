@@ -3,7 +3,7 @@ var mydata;
 
 var addButton = document.getElementById('add-anchor'),
 addtodoListener = function (evt) {
-    
+  
 var todoArea = document.querySelector('.todo-area'),
     
 todo_main=document.createElement('div'),
@@ -18,6 +18,19 @@ author = document.createElement('span'),
 author_date_div = document.createElement('div'),
 date = document.createElement('span');
     
+
+var span = document.createElement("span");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+      todo_main.appendChild(span);
+    span.addEventListener('click',function(e){
+        
+       var todo_main=this.parentNode;
+       var todoArea = document.querySelector('.todo-area');
+        todoArea.removeChild(todo_main);
+   
+    });
 author.innerHTML=document.getElementsByClassName("username")[0].innerHTML;
     
 date.innerHTML=new Date().toLocaleDateString();
@@ -51,7 +64,6 @@ plusImg.src="./images/add_box.png";
 
 title_div.innerHTML="Untitled";
 
-    //items_list.addEventListener('change',update_date);
 input_txt.type="text";
 itemButton.href="#";
 itemButton.addEventListener('click',addItem);
@@ -119,11 +131,6 @@ var update_date=function(evt,addButton){
     date.innerHTML=new Date().toLocaleDateString();
 }
 
-function translateMe(event){
-    event.target.style.transform = "translateY(30px)";
-    event.target.style.color ="red";
-    
-  }
 var addItem=function(evt){
 
 var newItem=this.parentNode;
@@ -214,39 +221,22 @@ left: randomLeft
 
 var mousePosition;
 var offset = [0,0];
-//var div;
+
 var isDown = false;
-function mouseUp() {
-    isDown = false;
-}
-
-function mouseMove(event) {
-    event.preventDefault();
-    if (isDown) {
-        mousePosition = {
-    
-            x : event.clientX,
-            y : event.clientY
-    
-        };
-        this.style.left = (mousePosition.x + offset[0]) + 'px';
-        this.style.top  = (mousePosition.y + offset[1]) + 'px';
-    }
-}
-
-function mouseDown(e) {
-    isDown = true;
-    
-    offset = [
-        this.offsetLeft - e.clientX,
-        this.offsetTop - e.clientY
-    ];
-}
 
 function load() {
+        //Send AJAX call to get the stciky dom.
+        var newStickyRequest = new XMLHttpRequest();
+        newStickyRequest.open('GET', 'data.json', true);
+        newStickyRequest.responseType = 'text';
+        newStickyRequest.onload = function (e) {
+           LoadFromJSON(this.responseText);
+        };
+        newStickyRequest.send();
+}
 
+function LoadFromJSON(data) {
     mydata = JSON.parse(data);
-
     for(var i=0; i<mydata.length;i++){
         addtodoListener();
         var todoMain= document.querySelector(".todo_main");
@@ -257,19 +247,13 @@ function load() {
         var items= mydata[i].items;
         if(items != null){
        
+       
         for(var j=0;j<items.length;j++){
-
                 var itemInput = document.querySelectorAll(".text");
                 var addItemlist = document.querySelectorAll(".addItem");
                 itemInput[i].value=items[j];
-                addItemlist[i].click();
-           
+                addItemlist[i].click();  
             }
-
         }
-   
-
     }
-   
-    
 }

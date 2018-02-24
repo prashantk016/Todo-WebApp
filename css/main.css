@@ -19,9 +19,10 @@
 .username{
     color: white;
     font-size: 20px;
-    margin: 10px 10px 0 0;
+    line-height: 2.4;
     text-decoration: underline;
     font-family: sans-serif;
+    padding-right: 10px;
 }
 .content{
     padding-bottom: 0;
@@ -223,3 +224,21 @@
     ul li input[type=text] {
       display:none;
     }
+.close {
+     position: absolute;
+    right: 0;
+    top: 0;
+    padding: 8px 12px 8px 12px;
+    font-size: 20px;
+    font-weight: bolder;
+    color: rgba(61, 61, 61, 0.7);
+    
+    
+}
+
+.close:hover {
+/*  background-color: #f44336;*/
+    transform: scale(1.5,1.5);
+  color: white;
+    border-radius: 0px 5px 0px 7px;
+}
