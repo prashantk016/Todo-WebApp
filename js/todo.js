@@ -1,8 +1,11 @@
 var json = false;
 var mydata;
+
 var addButton = document.getElementById('add-anchor'),
 addtodoListener = function (evt) {
+    
 var todoArea = document.querySelector('.todo-area'),
+    
 todo_main=document.createElement('div'),
 title_div=document.createElement('div'),
 content_div=document.createElement('div'),
@@ -10,11 +13,13 @@ items_list=document.createElement('ul'),
 newItem_div=document.createElement('div'),
 input_txt=document.createElement('input'),
 itemButton=document.createElement('a'),
-plusImg=document.createElement('img');
-author = document.createElement('span');
- space = document.createTextNode(" ");
+plusImg=document.createElement('img'),
+author = document.createElement('span'),
+author_date_div = document.createElement('div'),
 date = document.createElement('span');
+    
 author.innerHTML=document.getElementsByClassName("username")[0].innerHTML;
+    
 date.innerHTML=new Date().toLocaleDateString();
 
 todo_main.classList.add("todo_main");
@@ -25,8 +30,12 @@ newItem_div.classList.add("newItem");
 input_txt.classList.add("text");
 itemButton.classList.add("addItem");
 plusImg.classList.add("addItemImg");
+author_date_div.classList.add("author_date_div")
 author.classList.add("author");
+author.classList.add("pull-left");
 date.classList.add("date");
+date.classList.add("pull-right");
+
 
 todo_main.appendChild(title_div);
 todo_main.appendChild(content_div);
@@ -35,18 +44,21 @@ content_div.appendChild(newItem_div);
 newItem_div.appendChild(input_txt);
 newItem_div.appendChild(itemButton);
 itemButton.appendChild(plusImg);
-todo_main.appendChild(author);
-todo_main.appendChild(space);
-todo_main.appendChild(date);
-plusImg.src="./images/ic_add_black_24px.svg";
+todo_main.appendChild(author_date_div);
+author_date_div.appendChild(author);
+author_date_div.appendChild(date);
+plusImg.src="./images/add_box.png";
 
 title_div.innerHTML="Untitled";
 
+    //items_list.addEventListener('change',update_date);
 input_txt.type="text";
 itemButton.href="#";
 itemButton.addEventListener('click',addItem);
-
-title_div.style.background=random_bg_color();
+var bg_color=random_bg_color();
+   
+    author_date_div.style.background=bg_color;
+title_div.style.background=bg_color;
 position = gettodoPosition();
 todo_main.style.top = position.top;
 todo_main.style.left = position.left;
@@ -64,13 +76,17 @@ var offset = [0,0];
 var isDown = false;
 todo_main.addEventListener('mousedown', function(e) {
 isDown = true;
+    todo_main.style.zIndex=z++;
 offset = [
     todo_main.offsetLeft - e.clientX,
     todo_main.offsetTop - e.clientY
+    
 ];
+   
 }, true);
 
 todoArea.addEventListener('mouseup',  function() {
+    
     isDown = false;
 }, true);
 
@@ -85,12 +101,23 @@ todoArea.addEventListener('mousemove', function(event) {
         };
         todo_main.style.left = (mousePosition.x + offset[0]) + 'px';
         todo_main.style.top  = (mousePosition.y + offset[1]) + 'px';
+        
     }
 }, true);
 
 };
 
 addButton.addEventListener('click', addtodoListener);
+
+var update_date=function(evt,addButton){
+    if(evt==null)
+            var todo_main=addButton.parentNode.parentNode;
+    else
+         var todo_main=this.parentNode.parentNode.parentNode;
+    var author_date=todo_main.querySelector(".author_date_div");
+    var date=author_date.querySelector(".date");
+    date.innerHTML=new Date().toLocaleDateString();
+}
 
 function translateMe(event){
     event.target.style.transform = "translateY(30px)";
@@ -110,17 +137,19 @@ var content=newItem.parentNode;
 var items=content.querySelector(".items");
 
 var listItem = document.createElement("li");
-
+listItem.addEventListener("input",update_date);
 
 var checkBox = document.createElement("input"); 
 
 var label = document.createElement("label");
 
 label.contentEditable="true";
+  
 label.addEventListener('keypress',function(evt){
 if (evt.which === 13) {
 evt.preventDefault();
 } 
+   
 });
     
 var editInput = document.createElement("input"); 
@@ -155,7 +184,7 @@ listItem.appendChild(editButton);
 
 
 items.appendChild(listItem);
-
+   update_date(null,items);
 }
 var deleteItem=function(evt){
 var parent=this.parentNode.parentNode;
@@ -218,6 +247,7 @@ function mouseMove(event) {
 
 function mouseDown(e) {
     isDown = true;
+    
     offset = [
         this.offsetLeft - e.clientX,
         this.offsetTop - e.clientY
