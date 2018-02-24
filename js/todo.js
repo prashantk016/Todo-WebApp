@@ -152,24 +152,14 @@ evt.preventDefault();
    
 });
     
-var editInput = document.createElement("input"); 
-
-var editButton = document.createElement("a");
 
 var deleteButton = document.createElement("a");
-var editImage=document.createElement("img");
+
 var deleteImage=document.createElement("img");
-editImage.src="./images/edit_icon.svg";
 deleteImage.src="./images/delete_icon.svg";
-editButton.appendChild(editImage);
 deleteButton.appendChild(deleteImage);
 
-
 checkBox.type = "checkbox";
-editInput.type = "text";
-
-
-editButton.className = "edit";
 
 deleteButton.className = "delete";
 deleteButton.addEventListener('click', deleteItem);
@@ -178,9 +168,8 @@ label.innerText = taskString;
 
 listItem.appendChild(checkBox);
 listItem.appendChild(label);
-listItem.appendChild(editInput);
+
 listItem.appendChild(deleteButton);
-listItem.appendChild(editButton);
 
 
 items.appendChild(listItem);
