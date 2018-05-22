@@ -1,7 +1,7 @@
-# assignment-5-pastel-twisters
+# Todo WebApp
 
 ## Description
-Todo Web App
+Todo Web Application using only HTML5 and vallina Javascript
 
 ## Instruction on how to start the application
 
@@ -9,7 +9,6 @@ Open index.html with any modern browser
 
 ## Author
 Prashant Kabra
-Sneha Pai
 
 ## References
 [https://github.com/amuthanarulraj/stickies](https://github.com/amuthanarulraj/stickies)
